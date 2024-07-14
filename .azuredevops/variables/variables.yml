@@ -1,4 +1,6 @@
 #use this to store unsensitive variable info.
 variables:
+  - name: resourceGroupName
+    value: 'rg-auth-handler-webapi'
   - name: keyvaultName
     value: 'auth-handler-keyvault'
