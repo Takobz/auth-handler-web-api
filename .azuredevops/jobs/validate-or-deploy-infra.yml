@@ -1,0 +1,41 @@
+parameters:
+  - name: deploymentMode
+    type: string
+    default: 'Validation'
+    values:
+      - Validation
+      - Incremental
+  - name: jobDisplayName
+    type: string
+    default: 'Deploy Infra'
+    values:
+      - Deploy Infra
+      - Validate Infra
+  - name: jobName
+    type: string
+    default: DeployInfra
+    values:
+      - DeployInfra
+      - ValidateInfra
+  - name: dependsOn
+    type: string
+    default: 'TranspileBicepToARM'
+
+jobs:
+- job: ${{ parameters.jobName }}
+  displayName: ${{ parameters.jobDisplayName }}
+  dependsOn: ${{ parameters.dependsOn }}
+  steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+    inputs:
+      deploymentScope: 'Resource Group'
+      azureResourceManagerConnection: $(serviceConnectionName)
+      action: 'Create Or Update Resource Group'
+      resourceGroupName: ${{ variables.resourceGroupName }}
+      location: 'South Africa North'
+      templateLocation: 'Linked artifact'
+      csmFile: '$(Pipeline.Workspace)/s/infra/main.bicep'
+      overrideParameters: >-
+        -keyVaultName ${{ variables.keyVaultName }}
+      deploymentMode: ${{ parameters.deploymentMode }}
+      deploymentName: ${{ parameters.jobName }}

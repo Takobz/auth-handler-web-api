@@ -5,13 +5,22 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- template: variables/variables.yml
+- template: ./variables/variables.yml
 
 # replace with a template.
 stages:
-- stage: Build
+- stage: DeployToAzure
   jobs:
-  - job: Build
-    steps:
-    - script: echo "Hello, world!"
-      displayName: 'Run a one-line script'
+  #- template: jobs/transpile-infra.yml
+  - template: jobs/validate-or-deploy-infra.yml
+    parameters:
+      deploymentMode: 'Validation'
+      jobName: ValidateInfra
+      jobDisplayName: 'Validate Infra'
+      dependsOn: ''
+  - template: jobs/validate-or-deploy-infra.yml
+    parameters:
+      deploymentMode: 'Incremental'
+      jobName: DeployInfra
+      jobDisplayName: 'Deploy Infra'
+      dependsOn: 'ValidateInfra'

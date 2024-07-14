@@ -6,4 +6,11 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   tags: {
     purpose: 'testing stuff'
   }
+  properties:{
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+    tenantId: subscription().tenantId
+  }
 }

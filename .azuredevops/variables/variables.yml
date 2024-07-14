@@ -2,5 +2,7 @@
 variables:
   - name: resourceGroupName
     value: 'rg-auth-handler-webapi'
-  - name: keyvaultName
+  - name: keyVaultName
     value: 'auth-handler-keyvault'
+  - name: location
+    value: 'South Africa North'
