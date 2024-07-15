@@ -7,11 +7,9 @@ pool:
 variables:
 - template: ./variables/variables.yml
 
-# replace with a template.
 stages:
 - stage: DeployToAzure
   jobs:
-  #- template: jobs/transpile-infra.yml
   - template: jobs/validate-or-deploy-infra.yml
     parameters:
       deploymentMode: 'Validation'

@@ -1,5 +1,0 @@
-jobs:
-- job: TranspileBicepToARM
-  displayName: 'Transpile Bicep to ARM'
-  steps:
-  - bash: az bicep build --file "$(Pipeline.Workspace)/s/infra/main.bicep" --outfile "$(Pipeline.Workspace)/s/infra/main.json"
