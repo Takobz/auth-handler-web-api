@@ -20,6 +20,8 @@ parameters:
   - name: dependsOn
     type: string
     default: 'TranspileBicepToARM'
+  - name: keyVaultName
+    type: string
 
 jobs:
 - job: ${{ parameters.jobName }}
@@ -36,6 +38,6 @@ jobs:
       templateLocation: 'Linked artifact'
       csmFile: '$(Pipeline.Workspace)/s/infra/main.bicep'
       overrideParameters: >-
-        -keyVaultName ${{ variables.keyVaultName }}
+        -keyVaultName ${{ parameters.keyVaultName }}
       deploymentMode: ${{ parameters.deploymentMode }}
       deploymentName: ${{ parameters.jobName }}

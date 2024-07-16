@@ -16,9 +16,11 @@ stages:
       jobName: ValidateInfra
       jobDisplayName: 'Validate Infra'
       dependsOn: ''
+      keyVaultName: ${{ variables.keyVaultName }}
   - template: jobs/validate-or-deploy-infra.yml
     parameters:
       deploymentMode: 'Incremental'
       jobName: DeployInfra
       jobDisplayName: 'Deploy Infra'
       dependsOn: 'ValidateInfra'
+      keyVaultName: ${{ variables.keyVaultName }}

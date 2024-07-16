@@ -11,6 +11,14 @@ resource keyvault 'Microsoft.KeyVault/vaults@2023-07-01' = {
       family: 'A'
       name: 'standard'
     }
+    createMode: 'recover'
     tenantId: subscription().tenantId
+    enableSoftDelete: false
+    // accessPolicies: [
+    //   {
+    //     tenantId: subscription().tenantId
+    //     objectId: 
+    //   }
+    // ]
   }
 }
