@@ -1,4 +1,5 @@
 using Auth.AuthHandlers.API.Handlers;
+using Auth.AuthHandlers.API.AuthExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication(KeyVaultAuthDefaults.APIAuthScheme);
+builder.Services.AddAuthentication(KeyVaultAuthDefaults.APIAuthScheme)
+    .AddKeyVaultAPIAuth(options => {});
 
 var app = builder.Build();
 

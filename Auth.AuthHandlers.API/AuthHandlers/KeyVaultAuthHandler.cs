@@ -13,7 +13,6 @@ namespace Auth.AuthHandlers.API.Handlers
         {
             
         }
-
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             throw new NotImplementedException();
